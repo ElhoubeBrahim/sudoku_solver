@@ -1,0 +1,55 @@
+/*
+==========================
+=== Sudoku Grid Styles ===
+==========================
+*/
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  border: 2px #222 solid;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 20px auto;
+  user-select: none;
+
+  .row {
+    display: flex;
+    align-items: center;
+
+    &:nth-child(3n):not(:last-child) {
+      border-bottom: 2px #222 solid;
+    }
+
+    .column {
+      height: 45px;
+      width: 45px;
+      border: .5px #ddd solid;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+
+      &:nth-child(3n):not(:last-child) {
+        border-right: 2px #222 solid;
+      }
+
+      &.error {
+        background-color: lighten($danger, 30);
+        border-color: lighten($danger, 30);
+      }
+
+      &.solved {
+        background-color: #f3f3f3;
+        color: $success;
+        font-weight: bolder;
+      }
+
+      &.selected {
+        background-color: lightblue;
+        border-color: lightblue;
+      }
+    }
+  }
+}

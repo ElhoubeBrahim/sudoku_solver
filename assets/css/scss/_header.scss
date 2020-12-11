@@ -1,0 +1,41 @@
+/*
+=====================
+=== Header Styles ===
+=====================
+*/
+
+header.website-header {
+  padding: 5px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 1px #ddd solid;
+  box-shadow: 0 0 10px rgba($color: #000000, $alpha: .1);
+
+  .brand {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: $brand-font;
+
+    img {
+      height: 50px;
+      margin-inline-end: 10px;
+    }
+
+    span {
+      display: block;
+      border-radius: 5px;
+      background-color: #ddd;
+    }
+  }
+
+  .by {
+    color: #ccc;
+
+    span {
+      color: #999;
+    }
+  }
+}

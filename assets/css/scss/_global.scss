@@ -1,0 +1,230 @@
+/*
+=====================
+=== Global Styles ===
+=====================
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: #444;
+  font-family: $main_font;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+main {
+  padding: 0 30px;
+  padding-bottom: 20px;
+
+  .actions {
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .action {
+      all: unset;
+      display: flex;
+      align-items: center;
+      width: 100px;
+      padding: 10px 15px;
+      font-size: 1rem;
+      margin: 0 5px;
+      border: 1px #ddd solid;
+      border-radius: 4px;
+      cursor: pointer;
+      user-select: none;
+      transition: .3s all ease-in-out;
+
+      i {
+        margin-inline-end: 10px;
+      }
+
+      &.generate {
+        border-color: $secondary;
+        color: $secondary;
+
+        &:hover {
+          background-color: lighten($secondary, 40);
+        }
+      }
+
+      &.clear {
+        border-color: $danger;
+        color: $danger;
+
+        &:hover {
+          background-color: lighten($danger, 40);
+        }
+      }
+
+      &.solve {
+        border-color: $success;
+        color: $success;
+
+        &:hover {
+          background-color: lighten($success, 40);
+        }
+      }
+    }
+  }
+
+  .message {
+    max-width: 60%;
+    background-color: #eee;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 20px auto;
+
+    &.success {
+      background-color: $success;
+      box-shadow: inset 0 0 10px darken($success, 20);
+      color: #fff;
+    }
+
+    &.info {
+      background-color: $secondary;
+      box-shadow: inset 0 0 10px darken($secondary, 20);
+      color: #fff;
+    }
+
+    &.danger {
+      background-color: $danger;
+      box-shadow: inset 0 0 10px darken($danger, 20);
+      color: #fff;
+    }
+  }
+}
+
+.prompt {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba($color: #000000, $alpha: .5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  z-index: -99999;
+
+  &.show {
+    transition: .4s all ease-in-out;
+    opacity: 1;
+    pointer-events: all;
+    z-index: initial;
+
+    .algorithms {
+      transform: scale(1);
+    }
+  }
+
+  .algorithms {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 5px rgba($color: #000000, $alpha: .6);
+    transition: .3s all ease-in-out;
+    transform: scale(0);
+
+    .algo {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+
+      input[type=radio] {
+        width: 21px;
+        height: 21px;
+        border-radius: 50%;
+        outline: none;
+        display: inline-block;
+        position: relative;
+        margin-inline-end: 10px;
+        cursor: pointer;
+        border: 1px solid #bbb;
+        background: #f3f3f3;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+
+        &::after {
+          content: '';
+          display: block;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          position: absolute;
+          background-color: #fff;
+          height: 10px;
+          width: 10px;
+          border-radius: 50%;
+          opacity: 0;
+        }
+
+        &:checked {
+          background: $primary;
+          border-color: $primary;
+          transition: .2s cubic-bezier(.2, .85, .32, 1.2);
+
+          &+span {
+            color: $primary;
+          }
+
+          &::after {
+            opacity: 1;
+          }
+        }
+
+        &:focus {
+          box-shadow: 0 0 0 2px lighten(#275EFE, 30);
+        }
+
+        &:hover {
+          border-color: $primary;
+
+          &+span {
+            color: $primary;
+          }
+        }
+      }
+    }
+
+    .solve {
+      all: unset;
+      border: 1px $success solid;
+      color: $success;
+      text-align: center;
+      width: 50%;
+      margin-inline-start: auto;
+      margin-top: 20px;
+      padding: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: .3s all ease-in-out;
+
+      &:hover {
+        background-color: lighten($success, 40);
+      }
+    }
+  }
+}

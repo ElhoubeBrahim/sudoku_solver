@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="assets/vendor/remixicon/remixicon.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <title>Sudoku Solver</title>
+</head>
+
+<body>
+
+  <header class="website-header">
+    <a href="/" class="brand">
+      <img src="assets/images/sudoku_solver.svg" alt=" ">
+      <span>Sudoku Solver</span>
+    </a>
+    <div class="by">By <span>Elhoube Brahim</span></div>
+  </header>
+
+  <main>
+    <div class="grid"></div>
+    <div class="actions">
+      <button class="action generate">
+        <i class="ri-pencil-ruler-2-line"></i>
+        Generate
+      </button>
+      <button class="action clear" onclick="UI.clear_grid()">
+        <i class="ri-eraser-line"></i>
+        Clear
+      </button>
+      <button class="action solve" onclick="UI.open_prompt()">
+        <i class="ri-magic-line"></i>
+        Solve
+      </button>
+    </div>
+  </main>
+
+  <div class="prompt" onclick="UI.close_prompt(event)">
+    <div class="algorithms">
+      <label class="algo">
+        <input type="radio" class="algorithm" value="backtrack" name="algorithm">
+        <span>Backtracking</span>
+      </label>
+      <label class="algo">
+        <input type="radio" class="algorithm" value="backtrack_optimized" name="algorithm">
+        <span>Backtracking Optimized</span>
+      </label>
+      <label class="algo">
+        <input type="radio" class="algorithm" value="genetic" name="algorithm">
+        <span>Genetic Algorithm</span>
+      </label>
+      <label class="algo">
+        <input type="radio" class="algorithm" value="dlx" name="algorithm">
+        <span>Dancing Links</span>
+      </label>
+      <button class="solve" onclick="sudoku.solve(backtrack, genetic, dlx)">Solve</button>
+    </div>
+  </div>
+
+  <script src="any_sudoku_solver.js"></script>
+
+  <script src="classes/gui.js"></script>
+
+  <script src="classes/sudoku.js"></script>
+  <script src="classes/backtrack.js"></script>
+  <script src="classes/genetic.js"></script>
+  <script src="classes/dlx.js"></script>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
