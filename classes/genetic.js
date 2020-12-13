@@ -49,8 +49,15 @@ class Genetic {
         for (let j = 0; j < 9; j++) {
           // If The Current Cell is Empty
           if (board[i][j] == 0) {
+            // Generate a Random Number
+            let n = Math.floor(Math.random() * 9) + 1
+            // Check if The Generated Number is Valid on The Section
+            while (!this.is_possible_in_section(board, j, i, n)) {
+              n = Math.floor(Math.random() * 9) + 1
+            }
+
             // Fill it With Random Value
-            board[i][j] = Math.floor(Math.random() * 9) + 1
+            board[i][j] = n
           }
         }
       }
@@ -61,6 +68,31 @@ class Genetic {
 
     // Return The Generated Population
     return population
+  }
+
+  /**
+   * Check if a Number is Valid on His Section
+   * According to The Given Coordinates
+   * 
+   * @param {array} board 
+   * @param {number} x 
+   * @param {number} y 
+   * @param {number} n 
+   */
+  is_possible_in_section(board, x, y, n) {
+    // Get The Section Coordinates
+    let start_x = Math.floor(x / 3) * 3
+    let start_y = Math.floor(y / 3) * 3
+
+    // Check The Section
+    for (let i = start_y; i <= start_y + 2; i++) {
+      for (let j = start_x; j <= start_x + 2; j++) {
+        if (board[i][j] == n) return false
+      }
+    }
+
+    // If There is No Error Return True
+    return true
   }
 
   /**
@@ -95,6 +127,35 @@ class Genetic {
   }
 
   /**
+   * Same as count_errors method, but with different way
+   * 
+   * @param {array} board 
+   */
+  fitness(board) {
+    let fitness = 0
+
+    for (let i = 0; i < 9; i++) {
+      let row = []
+      let col = []
+      let sec = []
+      for (let j = 0; j < 9; j++) {
+        let n = board[i][j]
+        row[j] = n
+        col[j] = n
+        sec[j] = sudoku.get_section(board, i)[j].value
+      }
+      row = row.filter((el, i) => row.indexOf(el) == i)
+      col = col.filter((el, i) => col.indexOf(el) == i)
+      sec = sec.filter((el, i) => sec.indexOf(el) == i)
+      fitness += 9 - row.length
+      fitness += 9 - col.length
+      fitness += 9 - sec.length
+    }
+
+    console.log(fitness)
+  }
+
+  /**
    * Selection Function: Select Two Individus Randomly
    * From The Population
    * 
@@ -119,7 +180,7 @@ class Genetic {
     // Init Children Array
     let children = []
     // Get Random Position
-    let position = Math.floor(Math.random() * 8) + 1
+    let position = (Math.random() > 0.5) ? 3 : 6
 
     // Init Children
     let child_1 = JSON.parse(JSON.stringify(board_1))
@@ -142,6 +203,7 @@ class Genetic {
    * @param {array} board 
    */
   mutation(board) {
+    // return board
     // Copy Board Array Values to Muted Array
     let muted = JSON.parse(JSON.stringify(board))
 
@@ -153,9 +215,14 @@ class Genetic {
         let x = Math.floor(Math.random() * 9)
         let y = Math.floor(Math.random() * 9)
 
+        // Select Two Other Random Indexes at The Same Section
+        let i = Math.floor(Math.random() * 3) + Math.floor(x / 3) * 3
+        let j = Math.floor(Math.random() * 3) + Math.floor(y / 3) * 3
+
         // Do Mutation
-        if (this.grid[y][x] == 0) {
-          muted[y][x] = Math.floor(Math.random() * 9) + 1
+        if (this.grid[y][x] == 0 && this.grid[j][i] == 0) {
+          muted[y][x] = board[j][i]
+          muted[j][i] = board[y][x]
         }
       }
     }
@@ -187,6 +254,7 @@ class Genetic {
       population.sort((a, b) => this.count_errors(a) >= this.count_errors(b))
       // Get The Elite Indivitus
       elite = population.slice(0, Math.floor(population.length / 2))
+      // console.log(this.count_errors(elite[0]))
 
       // If There is a Board With No Errors in The Elite
       if (this.count_errors(elite[0]) == 0) {
@@ -231,9 +299,9 @@ class Genetic {
 
     // Get The Final Solution
     sudoku.message = {
-      content: `Ooops! We have reached the maximum number of generations without finding any solution. Please try other algorithms`,
+      content: `Ooops! We have reached the maximum number of generations without finding any correct solution. This is the best solution that we found with ${this.count_errors(elite[0])} errors.Please try other algorithms`,
       type: 'danger'
     }
-    sudoku.solution = this.population[0]
+    sudoku.solution = elite[0]
   }
 }

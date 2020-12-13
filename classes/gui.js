@@ -59,8 +59,7 @@ class GUI {
       // Loop Through Columns
       for (let j = 0; j < 9; j++) {
         // Clear Cell
-        grid.children[i].children[j].classList.remove('solved')
-        grid.children[i].children[j].classList.remove('selected')
+        grid.children[i].children[j].className = 'column'
         grid.children[i].children[j].innerHTML = ''
         // Clear Sudoku Matrix
         this.grid[i][j] = 0
@@ -184,6 +183,7 @@ class GUI {
    * @param {array} solution 
    */
   solve_grid(solution) {
+    console.log(solution)
     // Loop Through Solution Board
     for (let i = 0; i < 9; i++) {
       for (let j = 0; j < 9; j++) {
@@ -196,13 +196,14 @@ class GUI {
           // Get The Column
           let col = row.querySelector(`.column[data-col='${j}']`)
           // If Current Column Was Empty
-          if (col.innerHTML == '') {
+          if (this.grid[i][j] == 0) {
             // Fill The Cell With The Solution
             col.innerHTML = s
             // Append Solved Class To The Current Cell
             col.classList.add('solved')
           }
         }
+        this.grid[i][j] = s
       }
     }
   }

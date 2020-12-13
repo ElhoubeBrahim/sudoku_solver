@@ -45,7 +45,7 @@ class Backtrack {
     // Loop Throght Sections
     for (let s = 0; s < 9; s++) {
       // Get Current Section
-      let section = sudoku.get_section(s)
+      let section = sudoku.get_section(sudoku.grid, s)
       // Init Possibilities Array
       let possibilities = []
       // Init Section Possible Values Array
@@ -140,7 +140,7 @@ class Backtrack {
         // If The Current Cell is Empty
         if (this.grid[i][j] == 0) {
           // Loop Through Values - From 1 to 9
-          for (let n = 1; n <= 9; n++) {
+          for (let n = 9; n >= 1; n--) {
             // If The Current Value is Possible in The Current Cell
             if (sudoku.is_possible(j, i, n)) {
               // Set The Current Cell To The Current Possible Value
@@ -192,7 +192,7 @@ class Backtrack {
         // If The Current Cell is Empty
         if (this.grid[i][j] == 0) {
           // Loop Through Values - Frpm 1 To 9
-          for (let n = 1; n <= 9; n++) {
+          for (let n = 9; n >= 1; n--) {
             // If The Current Value is Possible in The Current Cell
             if (sudoku.is_possible(j, i, n)) {
               // Make Implications

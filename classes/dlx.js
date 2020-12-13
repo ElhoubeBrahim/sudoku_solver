@@ -19,7 +19,7 @@ class DLX {
     // Get Sudoku Class
     this.sudoku = sudoku
     // Get Sudoku Grid
-    this.grid = sudoku.grid
+    this.grid = JSON.parse(JSON.stringify(sudoku.grid))
   }
 
   /**

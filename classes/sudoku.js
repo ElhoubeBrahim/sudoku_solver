@@ -151,9 +151,10 @@ class Sudoku {
   /**
    * Get The Section Values
    * 
-   * @param {number} nth 
+   * @param {array} grid
+   * @param {number} nth
    */
-  get_section(nth) {
+  get_section(grid, nth) {
     // Init Section Array
     let section = []
     // Init Section Borders Indexes
@@ -167,7 +168,7 @@ class Sudoku {
         section.push({
           x: j,
           y: i,
-          value: this.grid[i][j]
+          value: grid[i][j]
         })
       }
     }
@@ -193,14 +194,12 @@ class Sudoku {
     // Check The Validity Of The Grid
     this.validate()
     if (this.is_valid) {
-      console.log('Valid')
       // Solve The Sudoku After 10ms
       setTimeout(() => {
         // Get The Choosen Algorithm
         let algorithm = (document.querySelector('input[name=algorithm]:checked') || '').value
         if (!this.algorithms.includes(algorithm)) algorithm = 'backtrack'
 
-        console.log(algorithm)
         // Solve The Sudoku According to The Choosen Algorithm
         switch (algorithm) {
           case 'backtrack':
@@ -215,6 +214,7 @@ class Sudoku {
 
           case 'genetic':
             genetic.run_evolution()
+            genetic.generations = 0
             break;
 
           case 'dlx':
@@ -226,8 +226,12 @@ class Sudoku {
         }
 
         // Output The Solution on The Screen
-        UI.solve_grid(this.solution)
-        UI.show_message(this.message.content, this.message.type)
+        if (this.solution.length == 9) {
+          UI.solve_grid(this.solution)
+          UI.show_message(this.message.content, this.message.type)
+        } else {
+          UI.show_message("Ooops! This sudoku puzzle has no solution. Please try other puzzle", 'danger')
+        }
       }, 10);
     }
   }
