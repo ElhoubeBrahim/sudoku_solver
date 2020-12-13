@@ -19,7 +19,7 @@ class DLX {
     // Get Sudoku Class
     this.sudoku = sudoku
     // Get Sudoku Grid
-    this.grid = JSON.parse(JSON.stringify(sudoku.grid))
+    this.grid = sudoku.grid
   }
 
   /**
@@ -154,11 +154,12 @@ class DLX {
    * Solve The Sudoku Puzzle
    */
   solve() {
+    let grid = JSON.parse(JSON.stringify(this.grid))
     var cover_matrix = []; // Cover Matrix
     var rinfo = [];
     for (var i = 0; i < 9; i++) {
       for (var j = 0; j < 9; j++) {
-        var g = this.grid[i][j] - 1;
+        var g = grid[i][j] - 1;
         // If The Cell is Not Empty
         if (g >= 0) {
           var row = new Array(324);
@@ -190,7 +191,7 @@ class DLX {
       var r = solutions[0];
       // Change The Grid Cells
       for (var i = 0; i < r.length; i++) {
-        this.grid[rinfo[r[i]]['row']][rinfo[r[i]]['col']] = rinfo[r[i]]['n'];
+        grid[rinfo[r[i]]['row']][rinfo[r[i]]['col']] = rinfo[r[i]]['n'];
       }
 
       // Get The Solution
@@ -198,7 +199,7 @@ class DLX {
         content: `Sudoku solved successfully with dancing links algorithm`,
         type: 'success'
       }
-      sudoku.solution = this.grid
+      sudoku.solution = grid
       return
     }
     // Get Error Message if there is no solution
