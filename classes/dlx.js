@@ -125,7 +125,7 @@ class DLX {
       // Init Last Node Variable
       let lastNode = null
       // Loop Throght Matrix Columns
-      for (let j = 0; j < matrix[i].length; j++) {
+      for (let j = 0; j < matrix[0].length; j++) {
         // If Current Cell Contains 1
         if (matrix[i][j] == 1) {
           // Create New Node
@@ -355,7 +355,7 @@ class DLX {
     // Run The Search Solution Function & Return The Solution
     let rows = this.search(head, 0, [])
     // If There is Solution
-    if (rows.length > 0) {
+    if (rows != null) {
       // Get The Sudoku Puzzle
       let grid = JSON.parse(JSON.stringify(this.grid))
       // Loop Through Solution's Rows
