@@ -128,7 +128,7 @@ class Backtrack {
         content: `Ooops! Solving this puzzle with backtracking takes long time. Please try other algorithms`,
         type: 'danger'
       }
-      sudoku.solution = JSON.parse(JSON.stringify(this.grid))
+      this.sudoku.solution = JSON.parse(JSON.stringify(this.grid))
       // Stop The Function
       return
     }
@@ -165,7 +165,7 @@ class Backtrack {
       type: 'success'
     }
     // Output The Found Solution
-    sudoku.solution = JSON.parse(JSON.stringify(this.grid))
+    this.sudoku.solution = JSON.parse(JSON.stringify(this.grid))
   }
 
   /**
@@ -180,7 +180,7 @@ class Backtrack {
         content: `Ooops! Solving this puzzle with backtracking takes long time. Please try other algorithms`,
         type: 'danger'
       }
-      sudoku.solution = JSON.parse(JSON.stringify(this.grid))
+      this.sudoku.solution = JSON.parse(JSON.stringify(this.grid))
       // Stop The Function
       return
     }
@@ -217,6 +217,6 @@ class Backtrack {
       type: 'success'
     }
     // Output The Found Solution
-    sudoku.solution = JSON.parse(JSON.stringify(this.grid))
+    this.sudoku.solution = JSON.parse(JSON.stringify(this.grid))
   }
 }

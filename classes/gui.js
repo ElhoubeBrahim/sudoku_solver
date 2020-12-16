@@ -183,7 +183,6 @@ class GUI {
    * @param {array} solution 
    */
   solve_grid(solution) {
-    console.log(solution)
     // Loop Through Solution Board
     for (let i = 0; i < 9; i++) {
       for (let j = 0; j < 9; j++) {

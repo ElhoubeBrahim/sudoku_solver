@@ -11,8 +11,6 @@ class Genetic {
   generations = 0
   // Generations Limit
   generations_limit = 100
-  // Store Population of The Current Generation
-  population = []
 
   /**
    * Get Sudoku Info After Instantiation
@@ -24,8 +22,6 @@ class Genetic {
     this.sudoku = sudoku
     // Get Sudoku Grid
     this.grid = sudoku.grid
-    // Generate Initial Population With 10 Individus
-    this.population = this.generate_population(10)
   }
 
   /**
@@ -241,8 +237,8 @@ class Genetic {
    * Run Evolution Function: Create and Optimize Generations
    */
   run_evolution() {
-    // Get Population
-    let population = this.population
+    // Generate Initial Population With 10 Individus
+    let population = this.generate_population(10)
     // Init The Elite Array
     let elite = []
 
@@ -263,7 +259,7 @@ class Genetic {
           content: `Solved successfully with ${this.generations} generation`,
           type: 'success'
         }
-        sudoku.solution = elite[0]
+        this.sudoku.solution = elite[0]
         // Stop The Function
         return
       }
@@ -302,6 +298,6 @@ class Genetic {
       content: `Ooops! We have reached the maximum number of generations without finding any correct solution. This is the best solution that we found with ${this.count_errors(elite[0])} errors.Please try other algorithms`,
       type: 'danger'
     }
-    sudoku.solution = elite[0]
+    this.sudoku.solution = elite[0]
   }
 }
