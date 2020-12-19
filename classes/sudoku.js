@@ -178,6 +178,67 @@ class Sudoku {
   }
 
   /**
+   * This Function is Called When The Generate Button Has Been Clicked
+   * It Generates a Grid Randomly, Using The DLX Solver
+   * 
+   * @param {class} dlx 
+   */
+  generate(dlx) {
+    // Empty The Grid
+    this.UI.clear_grid()
+
+    // Make a Grid of 20 Clues
+    for (let _ = 0; _ < 20; _++) {
+      // Random Colomn
+      let x = Math.floor(Math.random() * 9)
+      // Random Row
+      let y = Math.floor(Math.random() * 9)
+      // Random Value
+      let n = Math.floor(Math.random() * 9) + 1
+
+      // Check if The Value is Possible
+      while (!this.is_possible(x, y, n)) {
+        // Regenrate Until is_possible == true
+        x = Math.floor(Math.random() * 9)
+        y = Math.floor(Math.random() * 9)
+        n = Math.floor(Math.random() * 9) + 1
+      }
+
+      // Fill The Random Cell With Random Value
+      this.grid[y][x] = n
+    }
+
+    // Solve The Grid With DLX
+    dlx.solve()
+
+    // If There is Solution
+    if (this.solution.length == 9) {
+
+      // Empty Cells
+      for (let _ = 0; _ < 80; _++) {
+        // Get Random Column
+        let x = Math.floor(Math.random() * 9)
+        // Get Random Row
+        let y = Math.floor(Math.random() * 9)
+
+        // Empty The Random Cell
+        this.solution[y][x] = 0
+      }
+
+      // Fill The HTML Grid
+      this.UI.fill_grid(this.solution)
+      // Empty Solution Array
+      this.solution = []
+
+      // Stop Function
+      return
+    }
+
+    // If The Generated Grid is Not Solvable, Repeat Again
+    this.generate(dlx)
+  }
+
+  /**
    * Solve Sudoku Puzzle
    * 
    * @param {class} backtrack 

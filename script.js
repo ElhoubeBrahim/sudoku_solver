@@ -20,7 +20,7 @@ const puzzle = [
 const UI = new GUI(puzzle, grid)
 
 // Generate Grid on The Screen
-UI.generate_grid()
+UI.generate_grid() // HTML Grid
 UI.fill_grid(puzzle)
 
 // Instantiate Solver Classes

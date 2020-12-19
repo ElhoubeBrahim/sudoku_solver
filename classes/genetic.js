@@ -147,8 +147,6 @@ class Genetic {
       fitness += 9 - col.length
       fitness += 9 - sec.length
     }
-
-    console.log(fitness)
   }
 
   /**
@@ -250,7 +248,6 @@ class Genetic {
       population.sort((a, b) => this.count_errors(a) >= this.count_errors(b))
       // Get The Elite Indivitus
       elite = population.slice(0, Math.floor(population.length / 2))
-      // console.log(this.count_errors(elite[0]))
 
       // If There is a Board With No Errors in The Elite
       if (this.count_errors(elite[0]) == 0) {

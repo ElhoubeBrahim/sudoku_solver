@@ -324,7 +324,7 @@ class DLX {
       // Remove The Current Row From Solutions
       solution.pop()
       // Undo All Covered Nodes
-      for (let prev = node.right; prev != node; prev = prev.right) {
+      for (let prev = node.left; prev != node; prev = prev.left) {
         // Remove The Current Node's Column
         this.uncover(prev.column)
       }
@@ -378,7 +378,7 @@ class DLX {
       return
     }
     // Get Error Message if there is no solution
-    sudoku.message = {
+    this.sudoku.message = {
       content: `Ooops! We can't solve this puzzle with dlx algorithm. Please try other algorithm`,
       type: 'danger'
     }

@@ -109,6 +109,7 @@ class GUI {
       for (let j = 0; j < 9; j++) {
         // Get Current Cell Value
         let c = board[i][j]
+        this.grid[i][j] = c
         // If Current Cell is not Empty
         if (c != 0) {
           // Get The Row
