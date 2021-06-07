@@ -30,7 +30,7 @@ const genetic = new Genetic(sudoku)
 const dlx = new DLX(sudoku)
 
 // Listen To User Events
-document.body.addEventListener('keydown', function (event) {
+document.body.addEventListener('keyup', function (event) {
   sudoku.input(event)
 })
 

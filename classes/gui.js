@@ -41,6 +41,11 @@ class GUI {
         column.classList.add('column')
         column.setAttribute('data-col', j)
         column.addEventListener('click', function (event) {
+          // Show keyboard for mobile users
+          let keyboard = document.getElementById('keyboard')
+          keyboard.value = ''
+          keyboard.focus()
+          // Select target cell
           UI.select_cell(event.target)
         })
 

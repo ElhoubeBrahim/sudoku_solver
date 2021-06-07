@@ -97,6 +97,10 @@ class Sudoku {
 
     // Get The Entered Value
     let key = e.key
+    if (key == "Unidentified") {
+      key = parseInt(document.getElementById('keyboard').value)
+    }
+    document.getElementById('keyboard').value = 0
 
     // If The Entered Value Was Number Between 1 and 9
     if (key >= 1 && key <= 9) {

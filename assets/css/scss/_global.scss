@@ -109,6 +109,12 @@ main {
   }
 }
 
+input#keyboard {
+  position: fixed;
+  top: -99999px;
+  left: -99999px;
+}
+
 .prompt {
   position: fixed;
   top: 0;
