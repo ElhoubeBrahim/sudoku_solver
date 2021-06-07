@@ -31,6 +31,7 @@
 
 body {
   color: #444;
+  background-color: #fafafa;
   font-family: "open-sans";
   font-size: 1.2rem;
   line-height: 1.5;
@@ -63,6 +64,7 @@ main .actions .action {
   font-size: 1rem;
   margin: 0 5px;
   border: 1px #ddd solid;
+  background-color: #fff;
   border-radius: 4px;
   cursor: pointer;
   user-select: none;
@@ -254,13 +256,12 @@ main .message.danger {
 =====================
 */
 header.website-header {
-  padding: 5px 30px;
+  padding: 10px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
   border-bottom: 1px #ddd solid;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 header.website-header .brand {
@@ -289,6 +290,17 @@ header.website-header .by span {
   color: #999;
 }
 
+@media (max-width: 550px) {
+  header.website-header {
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+  header.website-header .by {
+    display: none;
+  }
+}
+
 /*
 ==========================
 === Sudoku Grid Styles ===
@@ -303,6 +315,7 @@ header.website-header .by span {
   overflow: hidden;
   margin: 20px auto;
   user-select: none;
+  background-color: #fff;
 }
 
 .grid .row {

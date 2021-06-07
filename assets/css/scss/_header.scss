@@ -5,13 +5,12 @@
 */
 
 header.website-header {
-  padding: 5px 30px;
+  padding: 10px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
   border-bottom: 1px #ddd solid;
-  box-shadow: 0 0 10px rgba($color: #000000, $alpha: .1);
 
   .brand {
     display: flex;
@@ -36,6 +35,18 @@ header.website-header {
 
     span {
       color: #999;
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  header.website-header {
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+
+    .by {
+      display: none;
     }
   }
 }
